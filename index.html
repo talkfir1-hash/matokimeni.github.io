@@ -1,386 +1,370 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מתוק ממני</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #fafafa; color: #333; }
+
+  .edit-banner { background: #fff3cd; color: #856404; text-align: center; padding: 10px; font-size: 0.9rem; border-bottom: 1px solid #ffc107; }
+
+  [contenteditable="true"] { outline: none; border-radius: 6px; transition: background .2s; cursor: text; }
+  [contenteditable="true"]:hover { background: rgba(192,118,58,0.08); }
+  [contenteditable="true"]:focus { background: rgba(192,118,58,0.13); box-shadow: 0 0 0 2px #e8a96a; }
+
+  nav { background: #fff; border-bottom: 2px solid #f0e6d3; padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .logo { font-size: 1.6rem; font-weight: 700; color: #c0763a; }
+  .logo span { color: #e8a96a; }
+  .cart-btn { background: #c0763a; color: #fff; border: none; border-radius: 30px; padding: 10px 20px; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background .2s; }
+  .cart-btn:hover { background: #a85e28; }
+  .cart-count { background: #fff; color: #c0763a; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
+
+  .hero { background: linear-gradient(135deg, #fff8f0 0%, #fdefd8 100%); padding: 80px 40px; text-align: center; }
+  .hero h1 { font-size: 3rem; color: #c0763a; margin-bottom: 16px; }
+  .hero p { font-size: 1.15rem; color: #777; max-width: 500px; margin: 0 auto 32px; line-height: 1.7; }
+  .btn { background: #c0763a; color: #fff; padding: 14px 36px; border: none; border-radius: 30px; font-size: 1rem; cursor: pointer; text-decoration: none; transition: background .2s, transform .2s; display: inline-block; }
+  .btn:hover { background: #a85e28; transform: translateY(-2px); }
+
+  section { padding: 60px 40px; }
+  .section-title { text-align: center; font-size: 1.8rem; color: #c0763a; margin-bottom: 10px; }
+  .section-sub { text-align: center; color: #999; margin-bottom: 40px; font-size: 0.95rem; }
+  .divider { width: 60px; height: 3px; background: #e8a96a; margin: 12px auto 36px; border-radius: 2px; }
+
+  .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; max-width: 900px; margin: 0 auto; }
+  .card { background: #fff; border-radius: 16px; padding: 24px 20px; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.07); transition: transform .2s, box-shadow .2s; display: flex; flex-direction: column; }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+  .card h3 { color: #333; margin-bottom: 8px; font-size: 1.1rem; }
+  .card p { color: #999; font-size: 0.88rem; line-height: 1.6; }
+  .card-price { color: #c0763a; font-weight: 700; font-size: 1rem; margin-top: 8px; }
+  .add-btn { background: #fff8f0; color: #c0763a; border: 2px solid #e8a96a; border-radius: 30px; padding: 10px 20px; font-size: 0.9rem; cursor: pointer; transition: all .2s; font-family: inherit; margin-top: 16px; }
+  .add-btn:hover { background: #c0763a; color: #fff; border-color: #c0763a; }
+
+  select, input[type="text"], input[type="tel"], input[type="datetime-local"], textarea { width: 100%; padding: 10px 12px; border: 1.5px solid #e8d5c0; border-radius: 10px; font-size: 0.85rem; font-family: inherit; background: #fff; color: #333; direction: rtl; margin-bottom: 10px; }
+  input[type="checkbox"] { width: auto; margin-left: 6px; }
+  input[type="radio"] { width: auto; margin-left: 6px; }
+  .radio-label { display: block; margin-bottom: 6px; font-size: 0.85rem; color: #555; cursor: pointer; text-align: right; }
+  .field-label { display: block; margin-bottom: 6px; font-size: 0.85rem; font-weight: 600; color: #c0763a; text-align: right; }
+
+  #about { background: #fff8f0; }
+  .about-inner { max-width: 600px; margin: 0 auto; text-align: center; }
+  .about-inner p { color: #666; line-height: 1.8; font-size: 1rem; }
+
+  .cart-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; }
+  .cart-overlay.open { display: block; }
+  .cart-modal { position: fixed; top: 0; left: 0; width: 340px; height: 100%; background: #fff; z-index: 201; padding: 24px; overflow-y: auto; transform: translateX(-100%); transition: transform .3s; box-shadow: 4px 0 20px rgba(0,0,0,0.15); }
+  .cart-modal.open { transform: translateX(0); }
+  .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .cart-header h3 { color: #c0763a; font-size: 1.3rem; }
+  .close-cart { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999; }
+  .cart-item { background: #fff8f0; border-radius: 10px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+  .cart-item-name { font-size: 0.9rem; color: #333; }
+  .cart-item-remove { background: none; border: none; color: #e57373; cursor: pointer; font-size: 1.1rem; }
+  .cart-empty { text-align: center; color: #bbb; margin-top: 40px; font-size: 0.95rem; }
+  .cart-footer { margin-top: 20px; }
+  .cart-order-btn { width: 100%; background: #c0763a; color: #fff; padding: 14px; border: none; border-radius: 30px; font-size: 1rem; cursor: pointer; font-family: inherit; }
+  .cart-order-btn:hover { background: #a85e28; }
+
+  .details-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 300; justify-content: center; align-items: center; }
+  .details-overlay.open { display: flex; }
+  .details-modal { background: #fff; border-radius: 20px; padding: 32px; width: 90%; max-width: 420px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); max-height: 90vh; overflow-y: auto; }
+  .details-modal h3 { color: #c0763a; font-size: 1.3rem; margin-bottom: 20px; text-align: center; }
+  .details-modal input, .details-modal textarea, .details-modal select { width: 100%; padding: 12px 14px; border: 1.5px solid #e8d5c0; border-radius: 10px; font-size: 0.95rem; font-family: inherit; direction: rtl; margin-bottom: 14px; }
+  .details-modal label { display: block; margin-bottom: 6px; color: #555; font-size: 0.9rem; font-weight: 600; }
+  .details-btns { display: flex; gap: 10px; margin-top: 6px; }
+  .confirm-btn { flex: 1; background: #c0763a; color: #fff; padding: 14px; border: none; border-radius: 30px; font-size: 1rem; cursor: pointer; font-family: inherit; }
+  .confirm-btn:hover { background: #a85e28; }
+  .cancel-btn { flex: 1; background: #f5f5f5; color: #777; padding: 14px; border: none; border-radius: 30px; font-size: 1rem; cursor: pointer; font-family: inherit; }
+  .cancel-btn:hover { background: #eee; }
+
+  footer { background: #3a2a1a; color: #ccc; text-align: center; padding: 30px 20px; font-size: 0.88rem; }
+  footer strong { color: #e8a96a; }
+</style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="he" dir="rtl"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1">&lt;title&gt;מתוק ממני&lt;/title&gt;</p>
-<p class="p1">&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>* { margin: 0; padding: 0; box-sizing: border-box; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>body { font-family: 'Segoe UI', Arial, sans-serif; background: #fafafa; color: #333; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.edit-banner { background: #fff3cd; color: #856404; text-align: center; padding: 10px; font-size: 0.9rem; border-bottom: 1px solid #ffc107; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>[contenteditable="true"] { outline: none; border-radius: 6px; transition: background .2s; cursor: text; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>[contenteditable="true"]:hover { background: rgba(192,118,58,0.08); }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>[contenteditable="true"]:focus { background: rgba(192,118,58,0.13); box-shadow: 0 0 0 2px #e8a96a; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>nav { background: #fff; border-bottom: 2px solid #f0e6d3; padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.logo { font-size: 1.6rem; font-weight: 700; color: #c0763a; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.logo span { color: #e8a96a; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cart-btn { background: #c0763a; color: #fff; border: none; border-radius: 30px; padding: 10px 20px; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background .2s; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cart-btn:hover { background: #a85e28; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cart-count { background: #fff; color: #c0763a; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.hero { background: linear-gradient(135deg, #fff8f0 0%, #fdefd8 100%); padding: 80px 40px; text-align: center; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.hero h1 { font-size: 3rem; color: #c0763a; margin-bottom: 16px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.hero p { font-size: 1.15rem; color: #777; max-width: 500px; margin: 0 auto 32px; line-height: 1.7; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.btn { background: #c0763a; color: #fff; padding: 14px 36px; border: none; border-radius: 30px; font-size: 1rem; cursor: pointer; text-decoration: none; transition: background .2s, transform .2s; display: inline-block; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.btn:hover { background: #a85e28; transform: translateY(-2px); }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>section { padding: 60px 40px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.section-title { text-align: center; font-size: 1.8rem; color: #c0763a; margin-bottom: 10px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.section-sub { text-align: center; color: #999; margin-bottom: 40px; font-size: 0.95rem; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.divider { width: 60px; height: 3px; background: #e8a96a; margin: 12px auto 36px; border-radius: 2px; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; max-width: 900px; margin: 0 auto; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.card { background: #fff; border-radius: 16px; padding: 24px 20px; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.07); transition: transform .2s, box-shadow .2s; display: flex; flex-direction: column; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.card h3 { color: #333; margin-bottom: 8px; font-size: 1.1rem; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.card p { color: #999; font-size: 0.88rem; line-height: 1.6; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.card-price { color: #c0763a; font-weight: 700; font-size: 1rem; margin-top: 8px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.add-btn { background: #fff8f0; color: #c0763a; border: 2px solid #e8a96a; border-radius: 30px; padding: 10px 20px; font-size: 0.9rem; cursor: pointer; transition: all .2s; font-family: inherit; margin-top: 16px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.add-btn:hover { background: #c0763a; color: #fff; border-color: #c0763a; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>select, input[type="text"], input[type="tel"], input[type="datetime-local"], textarea { width: 100%; padding: 10px 12px; border: 1.5px solid #e8d5c0; border-radius: 10px; font-size: 0.85rem; font-family: inherit; background: #fff; color: #333; direction: rtl; margin-bottom: 10px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>input[type="checkbox"] { width: auto; margin-left: 6px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>input[type="radio"] { width: auto; margin-left: 6px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.radio-label { display: block; margin-bottom: 6px; font-size: 0.85rem; color: #555; cursor: pointer; text-align: right; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.field-label { display: block; margin-bottom: 6px; font-size: 0.85rem; font-weight: 600; color: #c0763a; text-align: right; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>#about { background: #fff8f0; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.about-inner { max-width: 600px; margin: 0 auto; text-align: center; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.about-inner p { color: #666; line-height: 1.8; font-size: 1rem; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cart-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cart-overlay.open { display: block; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cart-modal { position: fixed; top: 0; left: 0; width: 340px; height: 100%; background: #fff; z-index: 201; padding: 24px; overflow-y: auto; transform: translateX(-100%); transition: transform .3s; box-shadow: 4px 0 20px rgba(0,0,0,0.15); }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cart-modal.open { transform: translateX(0); }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cart-header h3 { color: #c0763a; font-size: 1.3rem; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.close-cart { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cart-item { background: #fff8f0; border-radius: 10px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cart-item-name { font-size: 0.9rem; color: #333; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cart-item-remove { background: none; border: none; color: #e57373; cursor: pointer; font-size: 1.1rem; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cart-empty { text-align: center; color: #bbb; margin-top: 40px; font-size: 0.95rem; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cart-footer { margin-top: 20px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cart-order-btn { width: 100%; background: #c0763a; color: #fff; padding: 14px; border: none; border-radius: 30px; font-size: 1rem; cursor: pointer; font-family: inherit; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cart-order-btn:hover { background: #a85e28; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.details-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 300; justify-content: center; align-items: center; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.details-overlay.open { display: flex; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.details-modal { background: #fff; border-radius: 20px; padding: 32px; width: 90%; max-width: 420px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); max-height: 90vh; overflow-y: auto; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.details-modal h3 { color: #c0763a; font-size: 1.3rem; margin-bottom: 20px; text-align: center; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.details-modal input, .details-modal textarea, .details-modal select { width: 100%; padding: 12px 14px; border: 1.5px solid #e8d5c0; border-radius: 10px; font-size: 0.95rem; font-family: inherit; direction: rtl; margin-bottom: 14px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.details-modal label { display: block; margin-bottom: 6px; color: #555; font-size: 0.9rem; font-weight: 600; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.details-btns { display: flex; gap: 10px; margin-top: 6px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.confirm-btn { flex: 1; background: #c0763a; color: #fff; padding: 14px; border: none; border-radius: 30px; font-size: 1rem; cursor: pointer; font-family: inherit; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.confirm-btn:hover { background: #a85e28; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cancel-btn { flex: 1; background: #f5f5f5; color: #777; padding: 14px; border: none; border-radius: 30px; font-size: 1rem; cursor: pointer; font-family: inherit; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cancel-btn:hover { background: #eee; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>footer { background: #3a2a1a; color: #ccc; text-align: center; padding: 30px 20px; font-size: 0.88rem; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>footer strong { color: #e8a96a; }</p>
-<p class="p1">&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="edit-banner"&gt;לחצי על כל טקסט באתר כדי לערוך אותו ישירות!&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="cart-overlay" id="cartOverlay" onclick="closeCart()"&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;div class="cart-modal" id="cartModal"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="cart-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h3&gt;עגלת הקניות&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="close-cart" onclick="closeCart()"&gt;✕&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="cartItems"&gt;&lt;p class="cart-empty"&gt;העגלה ריקה עדיין 🛒&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="cart-footer" id="cartFooter" style="display:none;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="cart-order-btn" onclick="openDetailsModal()"&gt;שלח|י הזמנה&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="details-overlay" id="detailsOverlay"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="details-modal"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h3&gt;פרטי הזמנה&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;שם מלא&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="text" id="detailsName" placeholder="למשל: שירה כהן"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;מספר טלפון / ווטסאפ&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="tel" id="detailsPhone" placeholder="050-0000000"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;אופן קבלה&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div style="display:flex; gap:10px; margin-bottom:14px;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label style="flex:1; background:#fff8f0; border:2px solid #e8d5c0; border-radius:10px; padding:12px; cursor:pointer; text-align:center; font-size:0.9rem;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="radio" name="delivery" value="איסוף עצמי" onchange="toggleDelivery()"&gt; איסוף עצמי</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label style="flex:1; background:#fff8f0; border:2px solid #e8d5c0; border-radius:10px; padding:12px; cursor:pointer; text-align:center; font-size:0.9rem;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="radio" name="delivery" value="משלוח" onchange="toggleDelivery()"&gt; משלוח</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="addressField" style="display:none;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;כתובת למשלוח&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="text" id="detailsAddress" placeholder="רחוב, מספר, עיר..."&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;למתי את|ה רוצה את ההזמנה?&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="datetime-local" id="detailsDate"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;אלרגנים&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="text" id="detailsAllergies" placeholder="לדוגמה: אגוזים, גלוטן, חלב..."&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;הערות נוספות&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;textarea id="detailsNotes" placeholder="כל פרט שחשוב לך..." style="height:70px; resize:vertical;"&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="details-btns"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="cancel-btn" onclick="closeDetailsModal()"&gt;ביטול&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="confirm-btn" onclick="sendFinalOrder()"&gt;שלח|י עכשיו&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;nav&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="logo"&gt;🎂 מתוק &lt;span&gt;ממני&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;button class="cart-btn" onclick="openCart()"&gt;</p>
-<p dir="rtl" class="p1"><span class="Apple-converted-space">    </span>🛒 עגלה</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;span class="cart-count" id="cartCount"&gt;0&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/button&gt;</p>
-<p class="p1">&lt;/nav&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="hero"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;h1 contenteditable="true"&gt;מתוק ממני&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;p contenteditable="true"&gt;מאפים ביתיים טריים, עשויים באהבה ובלב שלם — עוגות, עוגיות, מאפים מגולגלים ועוד!&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;a href="#products" class="btn"&gt;לכל המוצרים&lt;/a&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;section id="products"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;h2 class="section-title" contenteditable="true"&gt;מה יש אצלי?&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;p class="section-sub" contenteditable="true"&gt;הכל נאפה טרי בהזמנה&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="divider"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="products-grid"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3 contenteditable="true"&gt;עוגות&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p contenteditable="true"&gt;עוגות יום הולדת, עוגות שכבות ועוגות מיוחדות לכל אירוע&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="margin-top:14px; text-align:right;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;"&gt;בחרי סוג:&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-label"&gt;&lt;input type="checkbox" name="cake" value="עוגת שוקולד"&gt; עוגת שוקולד &lt;span style="color:#999; font-size:0.8rem;"&gt;בחושה&lt;/span&gt; &lt;span style="color:#c0763a; font-size:0.8rem;"&gt;30 ₪&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-label"&gt;&lt;input type="checkbox" name="cake" value="עוגת לימון"&gt; עוגת לימון &lt;span style="color:#999; font-size:0.8rem;"&gt;בחושה&lt;/span&gt; &lt;span style="color:#c0763a; font-size:0.8rem;"&gt;30 ₪&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-label"&gt;&lt;input type="checkbox" name="cake" value="עוגת בננה"&gt; עוגת בננה &lt;span style="color:#999; font-size:0.8rem;"&gt;בחושה&lt;/span&gt; &lt;span style="color:#c0763a; font-size:0.8rem;"&gt;30 ₪&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-label"&gt;&lt;input type="checkbox" name="cake" value="עוגת תפוזים"&gt; עוגת תפוזים &lt;span style="color:#999; font-size:0.8rem;"&gt;בחושה&lt;/span&gt; &lt;span style="color:#c0763a; font-size:0.8rem;"&gt;30 ₪&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-label"&gt;&lt;input type="checkbox" name="cake" value="עוגת ביסקוויטים"&gt; עוגת ביסקוויטים &lt;span style="color:#c0763a; font-size:0.8rem;"&gt;40 ₪&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-label"&gt;&lt;input type="checkbox" name="cake" value="עוגת גבינה קרה"&gt; עוגת גבינה קרה &lt;span style="color:#c0763a; font-size:0.8rem;"&gt;45 ₪&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label class="field-label" style="margin-top:10px;"&gt;לאיזה אירוע?&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="text" id="cakeEvent" placeholder="לדוגמה: יום הולדת, חתונה..."&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label class="field-label"&gt;איזה עיצוב תרצו? &lt;span style="color:#c0763a; font-size:0.8rem;"&gt;(+10 ₪)&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;textarea id="cakeDesign" placeholder="תארו את העיצוב..." style="height:60px; resize:vertical;"&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label class="field-label"&gt;באיזה צבע תרצו את העיצוב שלכם? &lt;span style="color:#999; font-weight:400;"&gt;(עוגת ביסקוויטים וגבינה ללא עיצוב)&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="text" id="cakeColor" placeholder="לדוגמה: ורוד ולבן, כחול זהב..."&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="add-btn" onclick="addToCart('עוגה', getCakeDetails())"&gt;הוסיפ|י לעגלה&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3 contenteditable="true"&gt;עוגיות&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p contenteditable="true"&gt;עוגיות שוקולד צ'יפס, עוגיות חמאה ועוד&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="margin-top:14px; text-align:right;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;"&gt;בחרי סוג:&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-label"&gt;&lt;input type="checkbox" name="cookie" value="עוגיות שוקולד צ'יפס"&gt; עוגיות שוקולד צ'יפס &lt;span style="color:#c0763a; font-size:0.8rem;"&gt;(20 יח׳ — 35 ₪)&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-label"&gt;&lt;input type="checkbox" name="cookie" value="עוגיות בראוניז"&gt; עוגיות בראוניז &lt;span style="color:#c0763a; font-size:0.8rem;"&gt;(15 יח׳ — 30 ₪)&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-label"&gt;&lt;input type="checkbox" name="cookie" value="עוגיות חמאה"&gt; עוגיות חמאה &lt;span style="color:#c0763a; font-size:0.8rem;"&gt;(15 יח׳ — 25 ₪)&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-label"&gt;&lt;input type="checkbox" name="cookie" value="עוגיות אמסטרדם"&gt; עוגיות אמסטרדם &lt;span style="color:#c0763a; font-size:0.8rem;"&gt;(22 יח׳ — 40 ₪)&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="add-btn" onclick="addToCart('עוגיות', getSelected('cookie'))"&gt;הוסיפ|י לעגלה&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3 contenteditable="true"&gt;מאפים מגולגלים&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p contenteditable="true"&gt;רולים טעימים, מגולגלים חמים ורכים&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p class="card-price"&gt;20 יחידות — 35 ₪&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="margin-top:14px; text-align:right;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;"&gt;בחרי סוג:&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-label"&gt;&lt;input type="checkbox" name="roll" value="שוקולד בבצק וממרח שוקולד בפנים"&gt; שוקולד בבצק וממרח שוקולד בפנים &lt;span style="color:#c0763a; font-size:0.8rem;"&gt;(+2 ₪)&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-label"&gt;&lt;input type="checkbox" name="roll" value="וניל בבצק וממרח שוקולד בפנים"&gt; וניל בבצק וממרח שוקולד בפנים&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-label"&gt;&lt;input type="checkbox" name="roll" value="וניל בבצק וממרח לוטוס בפנים"&gt; וניל בבצק וממרח לוטוס בפנים &lt;span style="color:#c0763a; font-size:0.8rem;"&gt;(+5 ₪)&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-label"&gt;&lt;input type="checkbox" name="roll" value="שוקולד בבצק וממרח לוטוס בפנים"&gt; שוקולד בבצק וממרח לוטוס בפנים &lt;span style="color:#c0763a; font-size:0.8rem;"&gt;(+6 ₪)&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="add-btn" onclick="addToCart('מאפים מגולגלים', getSelected('roll'))"&gt;הוסיפ|י לעגלה&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3 contenteditable="true"&gt;מיוחדים&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p contenteditable="true"&gt;בראוניז ועוד הפתעות מתוקות&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="margin-top:14px; text-align:right;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;"&gt;בחרי סוג:&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-label"&gt;&lt;input type="checkbox" name="special" value="בראוניז"&gt; בראוניז &lt;span style="color:#c0763a; font-size:0.8rem;"&gt;(20 יח׳ — 40 ₪)&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="add-btn" onclick="addToCart('מיוחדים', getSelected('special'))"&gt;הוסיפ|י לעגלה&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3 contenteditable="true"&gt;מאפינס&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p contenteditable="true"&gt;מאפינס טריים ורכים בטעמים שונים&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p class="card-price"&gt;10 יחידות — 50 ₪&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="margin-top:14px; text-align:right;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;"&gt;בחרי סוג:&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-label"&gt;&lt;input type="checkbox" name="muffin" value="מאפינס שוקולד"&gt; מאפינס שוקולד&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-label"&gt;&lt;input type="checkbox" name="muffin" value="מאפינס בננה עם פצפוצי שוקולד"&gt; מאפינס בננה עם פצפוצי שוקולד &lt;span style="color:#c0763a; font-size:0.8rem;"&gt;(+10 ₪)&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-label"&gt;&lt;input type="checkbox" name="muffin" value="מאפינס וניל"&gt; מאפינס וניל&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="add-btn" onclick="addToCart('מאפינס', getSelected('muffin'))"&gt;הוסיפ|י לעגלה&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div style="max-width:900px; margin:40px auto 0; background:#fff; border-radius:16px; padding:30px; box-shadow:0 4px 16px rgba(0,0,0,0.07); text-align:center;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h3 style="color:#c0763a; font-size:1.3rem; margin-bottom:10px;" contenteditable="true"&gt;מארז מיוחד&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;p style="color:#999; font-size:0.9rem; margin-bottom:20px;" contenteditable="true"&gt;בנו מארז משלכם עם כל מה שאתם אוהבים!&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div style="text-align:right;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label class="field-label"&gt;מה תרצו במארז?&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;textarea id="packageContent" placeholder="לדוגמה: 5 עוגיות שוקולד, 3 מאפינס וניל, 2 בראוניז..."&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label class="field-label"&gt;פרטים נוספים / בקשות מיוחדות&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;textarea id="packageDetails" placeholder="לדוגמה: ללא אגוזים, עיטור מיוחד, למתנה..."&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="add-btn" onclick="addToCart('מארז מיוחד', getPackageDetails())"&gt;הוסיפ|י לעגלה&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;section id="about"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="about-inner"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2 class="section-title" contenteditable="true"&gt;קצת עלי&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="divider"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;p contenteditable="true"&gt;קוראים לי רונה ואני מחוברת למטבח מגיל 0.</p>
-<p class="p2"><br></p>
-<p dir="rtl" class="p1">האהבה הכי גדולה שלי זה לאפות ולבשל. אני אוהבת לשמח את המשפחה שלי עם מאפים טעימים, טריים וחמים — ועכשיו אני רוצה לשמח גם אתכם! 💛&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;footer&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;p contenteditable="true"&gt;עשוי באהבה על ידי &lt;strong&gt;מתוק ממני&lt;/strong&gt; &amp;copy; 2025&lt;/p&gt;</p>
-<p class="p1">&lt;/footer&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>var cart = [];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function getSelected(name) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var els = document.querySelectorAll('input[name="' + name + '"]:checked');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if (els.length === 0) return null;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>return Array.from(els).map(function(el) { return el.value; }).join(', ');</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function getCakeDetails() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var types = getSelected('cake');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var event = document.getElementById('cakeEvent').value;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var design = document.getElementById('cakeDesign').value;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var color = document.getElementById('cakeColor').value;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if (!types) return null;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>return types + (event ? ' | אירוע: ' + event : '') + (design ? ' | עיצוב: ' + design : '') + (color ? ' | צבע: ' + color : '');</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function getPackageDetails() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var content = document.getElementById('packageContent').value;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var details = document.getElementById('packageDetails').value;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if (!content) return null;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>return content + (details ? ' | ' + details : '');</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function addToCart(type, details) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if (!details) { alert('אנא בחרי סוג לפני הוספה לעגלה'); return; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>cart.push({ type: type, details: details });</p>
-<p class="p1"><span class="Apple-converted-space">    </span>updateCartUI();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>openCart();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function updateCartUI() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('cartCount').textContent = cart.length;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var el = document.getElementById('cartItems');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var footer = document.getElementById('cartFooter');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if (cart.length === 0) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>el.innerHTML = '&lt;p class="cart-empty"&gt;העגלה ריקה עדיין 🛒&lt;/p&gt;';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>footer.style.display = 'none';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>return;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>footer.style.display = 'block';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>el.innerHTML = cart.map(function(item, i) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>return '&lt;div class="cart-item"&gt;&lt;div class="cart-item-name"&gt;&lt;strong&gt;' + item.type + '&lt;/strong&gt;&lt;br&gt;&lt;span style="font-size:0.8rem;color:#999;"&gt;' + item.details + '&lt;/span&gt;&lt;/div&gt;&lt;button class="cart-item-remove" onclick="removeFromCart(' + i + ')"&gt;✕&lt;/button&gt;&lt;/div&gt;';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}).join('');</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function removeFromCart(i) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>cart.splice(i, 1);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>updateCartUI();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function openCart() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('cartModal').classList.add('open');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('cartOverlay').classList.add('open');</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function closeCart() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('cartModal').classList.remove('open');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('cartOverlay').classList.remove('open');</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function openDetailsModal() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>closeCart();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('detailsOverlay').classList.add('open');</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function closeDetailsModal() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('detailsOverlay').classList.remove('open');</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function toggleDelivery() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var val = document.querySelector('input[name="delivery"]:checked');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('addressField').style.display = val &amp;&amp; val.value === 'משלוח' ? 'block' : 'none';</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function sendFinalOrder() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var name = document.getElementById('detailsName').value;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var phone = document.getElementById('detailsPhone').value;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var delivery = document.querySelector('input[name="delivery"]:checked');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var address = document.getElementById('detailsAddress').value;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var date = document.getElementById('detailsDate').value;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var allergies = document.getElementById('detailsAllergies').value;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var notes = document.getElementById('detailsNotes').value;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>if (!name || !phone) { alert('אנא מלאי שם ומספר טלפון'); return; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if (!delivery) { alert('אנא בחרי איסוף עצמי או משלוח'); return; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if (delivery.value === 'משלוח' &amp;&amp; !address) { alert('אנא מלאי כתובת למשלוח'); return; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>var msg = 'הזמנה חדשה ממתוק ממני!\n\n';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>msg += 'שם: ' + name + '\n';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>msg += 'טלפון: ' + phone + '\n';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>msg += 'אופן קבלה: ' + delivery.value + (address ? ' — ' + address : '') + '\n';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if (date) msg += 'מועד רצוי: ' + new Date(date).toLocaleString('he-IL') + '\n';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if (allergies) msg += 'אלרגנים: ' + allergies + '\n';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if (notes) msg += 'הערות: ' + notes + '\n';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>msg += '\nפרטי הזמנה:\n';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>cart.forEach(function(item, i) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>msg += (i+1) + '. ' + item.type + ': ' + item.details + '\n';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>var url = 'https://wa.me/972549915744?text=' + encodeURIComponent(msg);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>window.open(url, '_blank');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>closeDetailsModal();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>cart = [];</p>
-<p class="p1"><span class="Apple-converted-space">    </span>updateCartUI();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>document.querySelectorAll('a[href^="#"]').forEach(function(a) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>a.addEventListener('click', function(e) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>e.preventDefault();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p1"><span class="Apple-converted-space">  </span>});</p>
-<p class="p1">&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+
+<div class="edit-banner">לחצי על כל טקסט באתר כדי לערוך אותו ישירות!</div>
+
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-modal" id="cartModal">
+  <div class="cart-header">
+    <h3>עגלת הקניות</h3>
+    <button class="close-cart" onclick="closeCart()">✕</button>
+  </div>
+  <div id="cartItems"><p class="cart-empty">העגלה ריקה עדיין 🛒</p></div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <button class="cart-order-btn" onclick="openDetailsModal()">שלח|י הזמנה</button>
+  </div>
+</div>
+
+<div class="details-overlay" id="detailsOverlay">
+  <div class="details-modal">
+    <h3>פרטי הזמנה</h3>
+    <label>שם מלא</label>
+    <input type="text" id="detailsName" placeholder="למשל: שירה כהן">
+    <label>מספר טלפון / ווטסאפ</label>
+    <input type="tel" id="detailsPhone" placeholder="050-0000000">
+    <label>אופן קבלה</label>
+    <div style="display:flex; gap:10px; margin-bottom:14px;">
+      <label style="flex:1; background:#fff8f0; border:2px solid #e8d5c0; border-radius:10px; padding:12px; cursor:pointer; text-align:center; font-size:0.9rem;">
+        <input type="radio" name="delivery" value="איסוף עצמי" onchange="toggleDelivery()"> איסוף עצמי
+      </label>
+      <label style="flex:1; background:#fff8f0; border:2px solid #e8d5c0; border-radius:10px; padding:12px; cursor:pointer; text-align:center; font-size:0.9rem;">
+        <input type="radio" name="delivery" value="משלוח" onchange="toggleDelivery()"> משלוח
+      </label>
+    </div>
+    <div id="addressField" style="display:none;">
+      <label>כתובת למשלוח</label>
+      <input type="text" id="detailsAddress" placeholder="רחוב, מספר, עיר...">
+    </div>
+    <label>למתי את|ה רוצה את ההזמנה?</label>
+    <input type="datetime-local" id="detailsDate">
+    <label>אלרגנים</label>
+    <input type="text" id="detailsAllergies" placeholder="לדוגמה: אגוזים, גלוטן, חלב...">
+    <label>הערות נוספות</label>
+    <textarea id="detailsNotes" placeholder="כל פרט שחשוב לך..." style="height:70px; resize:vertical;"></textarea>
+    <div class="details-btns">
+      <button class="cancel-btn" onclick="closeDetailsModal()">ביטול</button>
+      <button class="confirm-btn" onclick="sendFinalOrder()">שלח|י עכשיו</button>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <div class="logo">🎂 מתוק <span>ממני</span></div>
+  <button class="cart-btn" onclick="openCart()">
+    🛒 עגלה
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+</nav>
+
+<div class="hero">
+  <h1 contenteditable="true">מתוק ממני</h1>
+  <p contenteditable="true">מאפים ביתיים טריים, עשויים באהבה ובלב שלם — עוגות, עוגיות, מאפים מגולגלים ועוד!</p>
+  <a href="#products" class="btn">לכל המוצרים</a>
+</div>
+
+<section id="products">
+  <h2 class="section-title" contenteditable="true">מה יש אצלי?</h2>
+  <p class="section-sub" contenteditable="true">הכל נאפה טרי בהזמנה</p>
+  <div class="divider"></div>
+  <div class="products-grid">
+
+    <div class="card">
+      <h3 contenteditable="true">עוגות</h3>
+      <p contenteditable="true">עוגות יום הולדת, עוגות שכבות ועוגות מיוחדות לכל אירוע</p>
+      <div style="margin-top:14px; text-align:right;">
+        <p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;">בחרי סוג:</p>
+        <label class="radio-label"><input type="checkbox" name="cake" value="עוגת שוקולד"> עוגת שוקולד <span style="color:#999; font-size:0.8rem;">בחושה</span> <span style="color:#c0763a; font-size:0.8rem;">30 ₪</span></label>
+        <label class="radio-label"><input type="checkbox" name="cake" value="עוגת לימון"> עוגת לימון <span style="color:#999; font-size:0.8rem;">בחושה</span> <span style="color:#c0763a; font-size:0.8rem;">30 ₪</span></label>
+        <label class="radio-label"><input type="checkbox" name="cake" value="עוגת בננה"> עוגת בננה <span style="color:#999; font-size:0.8rem;">בחושה</span> <span style="color:#c0763a; font-size:0.8rem;">30 ₪</span></label>
+        <label class="radio-label"><input type="checkbox" name="cake" value="עוגת תפוזים"> עוגת תפוזים <span style="color:#999; font-size:0.8rem;">בחושה</span> <span style="color:#c0763a; font-size:0.8rem;">30 ₪</span></label>
+        <label class="radio-label"><input type="checkbox" name="cake" value="עוגת ביסקוויטים"> עוגת ביסקוויטים <span style="color:#c0763a; font-size:0.8rem;">40 ₪</span></label>
+        <label class="radio-label"><input type="checkbox" name="cake" value="עוגת גבינה קרה"> עוגת גבינה קרה <span style="color:#c0763a; font-size:0.8rem;">45 ₪</span></label>
+      </div>
+      <label class="field-label" style="margin-top:10px;">לאיזה אירוע?</label>
+      <input type="text" id="cakeEvent" placeholder="לדוגמה: יום הולדת, חתונה...">
+      <label class="field-label">איזה עיצוב תרצו? <span style="color:#c0763a; font-size:0.8rem;">(+10 ₪)</span></label>
+      <textarea id="cakeDesign" placeholder="תארו את העיצוב..." style="height:60px; resize:vertical;"></textarea>
+      <label class="field-label">באיזה צבע תרצו את העיצוב שלכם? <span style="color:#999; font-weight:400;">(עוגת ביסקוויטים וגבינה ללא עיצוב)</span></label>
+      <input type="text" id="cakeColor" placeholder="לדוגמה: ורוד ולבן, כחול זהב...">
+      <button class="add-btn" onclick="addToCart('עוגה', getCakeDetails())">הוסיפ|י לעגלה</button>
+    </div>
+
+    <div class="card">
+      <h3 contenteditable="true">עוגיות</h3>
+      <p contenteditable="true">עוגיות שוקולד צ'יפס, עוגיות חמאה ועוד</p>
+      <div style="margin-top:14px; text-align:right;">
+        <p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;">בחרי סוג:</p>
+        <label class="radio-label"><input type="checkbox" name="cookie" value="עוגיות שוקולד צ'יפס"> עוגיות שוקולד צ'יפס <span style="color:#c0763a; font-size:0.8rem;">(20 יח׳ — 35 ₪)</span></label>
+        <label class="radio-label"><input type="checkbox" name="cookie" value="עוגיות בראוניז"> עוגיות בראוניז <span style="color:#c0763a; font-size:0.8rem;">(15 יח׳ — 30 ₪)</span></label>
+        <label class="radio-label"><input type="checkbox" name="cookie" value="עוגיות חמאה"> עוגיות חמאה <span style="color:#c0763a; font-size:0.8rem;">(15 יח׳ — 25 ₪)</span></label>
+        <label class="radio-label"><input type="checkbox" name="cookie" value="עוגיות אמסטרדם"> עוגיות אמסטרדם <span style="color:#c0763a; font-size:0.8rem;">(22 יח׳ — 40 ₪)</span></label>
+      </div>
+      <button class="add-btn" onclick="addToCart('עוגיות', getSelected('cookie'))">הוסיפ|י לעגלה</button>
+    </div>
+
+    <div class="card">
+      <h3 contenteditable="true">מאפים מגולגלים</h3>
+      <p contenteditable="true">רולים טעימים, מגולגלים חמים ורכים</p>
+      <p class="card-price">20 יחידות — 35 ₪</p>
+      <div style="margin-top:14px; text-align:right;">
+        <p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;">בחרי סוג:</p>
+        <label class="radio-label"><input type="checkbox" name="roll" value="שוקולד בבצק וממרח שוקולד בפנים"> שוקולד בבצק וממרח שוקולד בפנים <span style="color:#c0763a; font-size:0.8rem;">(+2 ₪)</span></label>
+        <label class="radio-label"><input type="checkbox" name="roll" value="וניל בבצק וממרח שוקולד בפנים"> וניל בבצק וממרח שוקולד בפנים</label>
+        <label class="radio-label"><input type="checkbox" name="roll" value="וניל בבצק וממרח לוטוס בפנים"> וניל בבצק וממרח לוטוס בפנים <span style="color:#c0763a; font-size:0.8rem;">(+5 ₪)</span></label>
+        <label class="radio-label"><input type="checkbox" name="roll" value="שוקולד בבצק וממרח לוטוס בפנים"> שוקולד בבצק וממרח לוטוס בפנים <span style="color:#c0763a; font-size:0.8rem;">(+6 ₪)</span></label>
+      </div>
+      <button class="add-btn" onclick="addToCart('מאפים מגולגלים', getSelected('roll'))">הוסיפ|י לעגלה</button>
+    </div>
+
+    <div class="card">
+      <h3 contenteditable="true">מיוחדים</h3>
+      <p contenteditable="true">בראוניז ועוד הפתעות מתוקות</p>
+      <div style="margin-top:14px; text-align:right;">
+        <p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;">בחרי סוג:</p>
+        <label class="radio-label"><input type="checkbox" name="special" value="בראוניז"> בראוניז <span style="color:#c0763a; font-size:0.8rem;">(20 יח׳ — 40 ₪)</span></label>
+      </div>
+      <button class="add-btn" onclick="addToCart('מיוחדים', getSelected('special'))">הוסיפ|י לעגלה</button>
+    </div>
+
+    <div class="card">
+      <h3 contenteditable="true">מאפינס</h3>
+      <p contenteditable="true">מאפינס טריים ורכים בטעמים שונים</p>
+      <p class="card-price">10 יחידות — 50 ₪</p>
+      <div style="margin-top:14px; text-align:right;">
+        <p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;">בחרי סוג:</p>
+        <label class="radio-label"><input type="checkbox" name="muffin" value="מאפינס שוקולד"> מאפינס שוקולד</label>
+        <label class="radio-label"><input type="checkbox" name="muffin" value="מאפינס בננה עם פצפוצי שוקולד"> מאפינס בננה עם פצפוצי שוקולד <span style="color:#c0763a; font-size:0.8rem;">(+10 ₪)</span></label>
+        <label class="radio-label"><input type="checkbox" name="muffin" value="מאפינס וניל"> מאפינס וניל</label>
+      </div>
+      <button class="add-btn" onclick="addToCart('מאפינס', getSelected('muffin'))">הוסיפ|י לעגלה</button>
+    </div>
+
+  </div>
+
+  <div style="max-width:900px; margin:40px auto 0; background:#fff; border-radius:16px; padding:30px; box-shadow:0 4px 16px rgba(0,0,0,0.07); text-align:center;">
+    <h3 style="color:#c0763a; font-size:1.3rem; margin-bottom:10px;" contenteditable="true">מארז מיוחד</h3>
+    <p style="color:#999; font-size:0.9rem; margin-bottom:20px;" contenteditable="true">בנו מארז משלכם עם כל מה שאתם אוהבים!</p>
+    <div style="text-align:right;">
+      <label class="field-label">מה תרצו במארז?</label>
+      <textarea id="packageContent" placeholder="לדוגמה: 5 עוגיות שוקולד, 3 מאפינס וניל, 2 בראוניז..."></textarea>
+      <label class="field-label">פרטים נוספים / בקשות מיוחדות</label>
+      <textarea id="packageDetails" placeholder="לדוגמה: ללא אגוזים, עיטור מיוחד, למתנה..."></textarea>
+    </div>
+    <button class="add-btn" onclick="addToCart('מארז מיוחד', getPackageDetails())">הוסיפ|י לעגלה</button>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-inner">
+    <h2 class="section-title" contenteditable="true">קצת עלי</h2>
+    <div class="divider"></div>
+    <p contenteditable="true">קוראים לי רונה ואני מחוברת למטבח מגיל 0.
+
+האהבה הכי גדולה שלי זה לאפות ולבשל. אני אוהבת לשמח את המשפחה שלי עם מאפים טעימים, טריים וחמים — ועכשיו אני רוצה לשמח גם אתכם! 💛</p>
+  </div>
+</section>
+
+<footer>
+  <p contenteditable="true">עשוי באהבה על ידי <strong>מתוק ממני</strong> &copy; 2025</p>
+</footer>
+
+<script>
+  var cart = [];
+
+  function getSelected(name) {
+    var els = document.querySelectorAll('input[name="' + name + '"]:checked');
+    if (els.length === 0) return null;
+    return Array.from(els).map(function(el) { return el.value; }).join(', ');
+  }
+
+  function getCakeDetails() {
+    var types = getSelected('cake');
+    var event = document.getElementById('cakeEvent').value;
+    var design = document.getElementById('cakeDesign').value;
+    var color = document.getElementById('cakeColor').value;
+    if (!types) return null;
+    return types + (event ? ' | אירוע: ' + event : '') + (design ? ' | עיצוב: ' + design : '') + (color ? ' | צבע: ' + color : '');
+  }
+
+  function getPackageDetails() {
+    var content = document.getElementById('packageContent').value;
+    var details = document.getElementById('packageDetails').value;
+    if (!content) return null;
+    return content + (details ? ' | ' + details : '');
+  }
+
+  function addToCart(type, details) {
+    if (!details) { alert('אנא בחרי סוג לפני הוספה לעגלה'); return; }
+    cart.push({ type: type, details: details });
+    updateCartUI();
+    openCart();
+  }
+
+  function updateCartUI() {
+    document.getElementById('cartCount').textContent = cart.length;
+    var el = document.getElementById('cartItems');
+    var footer = document.getElementById('cartFooter');
+    if (cart.length === 0) {
+      el.innerHTML = '<p class="cart-empty">העגלה ריקה עדיין 🛒</p>';
+      footer.style.display = 'none';
+      return;
+    }
+    footer.style.display = 'block';
+    el.innerHTML = cart.map(function(item, i) {
+      return '<div class="cart-item"><div class="cart-item-name"><strong>' + item.type + '</strong><br><span style="font-size:0.8rem;color:#999;">' + item.details + '</span></div><button class="cart-item-remove" onclick="removeFromCart(' + i + ')">✕</button></div>';
+    }).join('');
+  }
+
+  function removeFromCart(i) {
+    cart.splice(i, 1);
+    updateCartUI();
+  }
+
+  function openCart() {
+    document.getElementById('cartModal').classList.add('open');
+    document.getElementById('cartOverlay').classList.add('open');
+  }
+
+  function closeCart() {
+    document.getElementById('cartModal').classList.remove('open');
+    document.getElementById('cartOverlay').classList.remove('open');
+  }
+
+  function openDetailsModal() {
+    closeCart();
+    document.getElementById('detailsOverlay').classList.add('open');
+  }
+
+  function closeDetailsModal() {
+    document.getElementById('detailsOverlay').classList.remove('open');
+  }
+
+  function toggleDelivery() {
+    var val = document.querySelector('input[name="delivery"]:checked');
+    document.getElementById('addressField').style.display = val && val.value === 'משלוח' ? 'block' : 'none';
+  }
+
+  function sendFinalOrder() {
+    var name = document.getElementById('detailsName').value;
+    var phone = document.getElementById('detailsPhone').value;
+    var delivery = document.querySelector('input[name="delivery"]:checked');
+    var address = document.getElementById('detailsAddress').value;
+    var date = document.getElementById('detailsDate').value;
+    var allergies = document.getElementById('detailsAllergies').value;
+    var notes = document.getElementById('detailsNotes').value;
+
+    if (!name || !phone) { alert('אנא מלאי שם ומספר טלפון'); return; }
+    if (!delivery) { alert('אנא בחרי איסוף עצמי או משלוח'); return; }
+    if (delivery.value === 'משלוח' && !address) { alert('אנא מלאי כתובת למשלוח'); return; }
+
+    var msg = 'הזמנה חדשה ממתוק ממני!\n\n';
+    msg += 'שם: ' + name + '\n';
+    msg += 'טלפון: ' + phone + '\n';
+    msg += 'אופן קבלה: ' + delivery.value + (address ? ' — ' + address : '') + '\n';
+    if (date) msg += 'מועד רצוי: ' + new Date(date).toLocaleString('he-IL') + '\n';
+    if (allergies) msg += 'אלרגנים: ' + allergies + '\n';
+    if (notes) msg += 'הערות: ' + notes + '\n';
+    msg += '\nפרטי הזמנה:\n';
+    cart.forEach(function(item, i) {
+      msg += (i+1) + '. ' + item.type + ': ' + item.details + '\n';
+    });
+
+    var url = 'https://wa.me/972549915744?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank');
+    closeDetailsModal();
+    cart = [];
+    updateCartUI();
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
 </body>
 </html>
