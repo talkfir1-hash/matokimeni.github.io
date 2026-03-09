@@ -399,6 +399,7 @@
     msg += '\n💰 סה״כ לתשלום: ' + totalSum + ' ₪';
     if (hasCustom) msg += ' + מארז לפי תיאום';
     msg += '\n⚠️ ההזמנה מחייבת תשלום מראש בביט';
+    if (!hasCustom && totalSum > 0) msg += '\n💳 לתשלום בביט: https://bitpay.me/0502424464/' + totalSum;
 
     var url = 'https://wa.me/972549915744?text=' + encodeURIComponent(msg);
     window.open(url, '_blank');
