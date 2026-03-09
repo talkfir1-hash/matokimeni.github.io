@@ -288,9 +288,32 @@
     return content + (details ? ' | ' + details : '');
   }
 
+  var prices = {
+    'עוגת שוקולד': 30, 'עוגת לימון': 30, 'עוגת בננה': 30, 'עוגת תפוזים': 30,
+    'עוגת ביסקוויטים': 40, 'עוגת גבינה קרה': 45,
+    "עוגיות שוקולד צ'יפס": 35, 'עוגיות בראוניז': 30, 'עוגיות חמאה': 25, 'עוגיות אמסטרדם': 40,
+    'בראוניז': 40,
+    'מאפינס שוקולד': 50, 'מאפינס וניל': 50, 'מאפינס בננה עם פצפוצי שוקולד': 60,
+    'שוקולד בבצק וממרח שוקולד בפנים': 37, 'וניל בבצק וממרח שוקולד בפנים': 35,
+    'וניל בבצק וממרח לוטוס בפנים': 40, 'שוקולד בבצק וממרח לוטוס בפנים': 41
+  };
+
+  function calcPrice(type, details) {
+    if (type === 'מארז מיוחד') return null;
+    var total = 0;
+    var items = details.split('|')[0].split(',').map(function(s){ return s.trim(); });
+    items.forEach(function(item) {
+      if (prices[item]) total += prices[item];
+    });
+    // עיצוב עוגה
+    if (type === 'עוגה' && details.indexOf('עיצוב:') !== -1) total += 10;
+    return total;
+  }
+
   function addToCart(type, details) {
     if (!details) { alert('אנא בחרי סוג לפני הוספה לעגלה'); return; }
-    cart.push({ type: type, details: details });
+    var price = calcPrice(type, details);
+    cart.push({ type: type, details: details, price: price });
     updateCartUI();
     openCart();
   }
@@ -305,9 +328,15 @@
       return;
     }
     footer.style.display = 'block';
+    var totalSum = 0;
+    var hasCustom = false;
     el.innerHTML = cart.map(function(item, i) {
-      return '<div class="cart-item"><div class="cart-item-name"><strong>' + item.type + '</strong><br><span style="font-size:0.8rem;color:#999;">' + item.details + '</span></div><button class="cart-item-remove" onclick="removeFromCart(' + i + ')">✕</button></div>';
+      var priceStr = item.price ? item.price + ' ₪' : 'מחיר לפי תיאום';
+      if (item.price) totalSum += item.price; else hasCustom = true;
+      return '<div class="cart-item"><div class="cart-item-name"><strong>' + item.type + '</strong><br><span style="font-size:0.8rem;color:#999;">' + item.details + '</span><br><span style="font-size:0.85rem;color:#c0763a;font-weight:700;">' + priceStr + '</span></div><button class="cart-item-remove" onclick="removeFromCart(' + i + ')">✕</button></div>';
     }).join('');
+    var totalLine = '<div style="margin-top:14px;padding-top:14px;border-top:2px solid #f0e6d3;font-weight:700;color:#c0763a;font-size:1rem;">סה״כ: ' + totalSum + ' ₪' + (hasCustom ? ' + מארז לפי תיאום' : '') + '</div>';
+    el.innerHTML += totalLine;
   }
 
   function removeFromCart(i) {
@@ -360,9 +389,15 @@
     if (allergies) msg += 'אלרגנים: ' + allergies + '\n';
     if (notes) msg += 'הערות: ' + notes + '\n';
     msg += '\nפרטי הזמנה:\n';
+    var totalSum = 0;
+    var hasCustom = false;
     cart.forEach(function(item, i) {
-      msg += (i+1) + '. ' + item.type + ': ' + item.details + '\n';
+      var priceStr = item.price ? item.price + ' ₪' : 'מחיר לפי תיאום';
+      if (item.price) totalSum += item.price; else hasCustom = true;
+      msg += (i+1) + '. ' + item.type + ': ' + item.details + ' — ' + priceStr + '\n';
     });
+    msg += '\n💰 סה״כ לתשלום: ' + totalSum + ' ₪' + (hasCustom ? ' + מארז לפי תיאום' : '') + '\n';
+    msg += '⚠️ ההזמנה מחייבת תשלום מראש בביט';
 
     var url = 'https://wa.me/972549915744?text=' + encodeURIComponent(msg);
     window.open(url, '_blank');
