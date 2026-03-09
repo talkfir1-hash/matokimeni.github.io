@@ -8,12 +8,6 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Segoe UI', Arial, sans-serif; background: #fafafa; color: #333; }
 
-  .edit-banner { display: none; }
-
-  [contenteditable="true"] { outline: none; border-radius: 6px; transition: background .2s; cursor: text; }
-  [contenteditable="true"]:hover { background: rgba(192,118,58,0.08); }
-  [contenteditable="true"]:focus { background: rgba(192,118,58,0.13); box-shadow: 0 0 0 2px #e8a96a; }
-
   nav { background: #fff; border-bottom: 2px solid #f0e6d3; padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
   .logo { font-size: 1.6rem; font-weight: 700; color: #c0763a; }
   .logo span { color: #e8a96a; }
@@ -40,6 +34,11 @@
   .card-price { color: #c0763a; font-weight: 700; font-size: 1rem; margin-top: 8px; }
   .add-btn { background: #fff8f0; color: #c0763a; border: 2px solid #e8a96a; border-radius: 30px; padding: 10px 20px; font-size: 0.9rem; cursor: pointer; transition: all .2s; font-family: inherit; margin-top: 16px; }
   .add-btn:hover { background: #c0763a; color: #fff; border-color: #c0763a; }
+
+  /* readonly style */
+  input[type="text"][readonly], input[type="tel"][readonly], input[type="datetime-local"][readonly], textarea[readonly] {
+    background: #f5f0eb; color: #aaa; cursor: not-allowed; border-color: #e8d5c0;
+  }
 
   select, input[type="text"], input[type="tel"], input[type="datetime-local"], textarea { width: 100%; padding: 10px 12px; border: 1.5px solid #e8d5c0; border-radius: 10px; font-size: 0.85rem; font-family: inherit; background: #fff; color: #333; direction: rtl; margin-bottom: 10px; }
   input[type="checkbox"] { width: auto; margin-left: 6px; }
@@ -83,8 +82,6 @@
 </style>
 </head>
 <body>
-
-<div class="edit-banner">לחצי על כל טקסט באתר כדי לערוך אותו ישירות!</div>
 
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
 <div class="cart-modal" id="cartModal">
@@ -140,20 +137,21 @@
 </nav>
 
 <div class="hero">
-  <h1 contenteditable="true">מתוק ממני</h1>
-  <p contenteditable="true">מאפים ביתיים טריים, עשויים באהבה ובלב שלם — עוגות, עוגיות, מאפים מגולגלים ועוד!</p>
+  <h1>מתוק ממני</h1>
+  <p>מאפים ביתיים טריים, עשויים באהבה ובלב שלם — עוגות, עוגיות, מאפים מגולגלים ועוד!</p>
   <a href="#products" class="btn">לכל המוצרים</a>
 </div>
 
 <section id="products">
-  <h2 class="section-title" contenteditable="true">מה יש אצלי?</h2>
-  <p class="section-sub" contenteditable="true">הכל נאפה טרי בהזמנה</p>
+  <h2 class="section-title">מה יש אצלי?</h2>
+  <p class="section-sub">הכל נאפה טרי בהזמנה</p>
   <div class="divider"></div>
   <div class="products-grid">
 
     <div class="card">
-      <h3 contenteditable="true">עוגות</h3>
-      <p contenteditable="true">עוגות יום הולדת, עוגות שכבות ועוגות מיוחדות לכל אירוע</p>
+      <img src="WhatsApp%20Image%202026-03-06%20at%2014.33.22%20(1).jpeg" alt="מאפים מגולגלים" style="width:100%; border-radius:12px; margin-bottom:12px; object-fit:cover; height:180px;">
+      <h3>עוגות</h3>
+      <p>עוגות יום הולדת, עוגות שכבות ועוגות מיוחדות לכל אירוע</p>
       <div style="margin-top:14px; text-align:right;">
         <p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;">בחרי סוג:</p>
         <label class="radio-label"><input type="checkbox" name="cake" value="עוגת שוקולד"> עוגת שוקולד <span style="color:#999; font-size:0.8rem;">בחושה</span> <span style="color:#c0763a; font-size:0.8rem;">30 ₪</span></label>
@@ -164,17 +162,17 @@
         <label class="radio-label"><input type="checkbox" name="cake" value="עוגת גבינה קרה"> עוגת גבינה קרה <span style="color:#c0763a; font-size:0.8rem;">45 ₪</span></label>
       </div>
       <label class="field-label" style="margin-top:10px;">לאיזה אירוע?</label>
-      <input type="text" id="cakeEvent" placeholder="לדוגמה: יום הולדת, חתונה...">
+      <input type="text" id="cakeEvent" placeholder="לדוגמה: יום הולדת, חתונה..." readonly>
       <label class="field-label">איזה עיצוב תרצו? <span style="color:#c0763a; font-size:0.8rem;">(+10 ₪)</span></label>
-      <textarea id="cakeDesign" placeholder="תארו את העיצוב..." style="height:60px; resize:vertical;"></textarea>
+      <textarea id="cakeDesign" placeholder="תארו את העיצוב..." style="height:60px; resize:vertical;" readonly></textarea>
       <label class="field-label">באיזה צבע תרצו את העיצוב שלכם? <span style="color:#999; font-weight:400;">(עוגת ביסקוויטים וגבינה ללא עיצוב)</span></label>
-      <input type="text" id="cakeColor" placeholder="לדוגמה: ורוד ולבן, כחול זהב...">
+      <input type="text" id="cakeColor" placeholder="לדוגמה: ורוד ולבן, כחול זהב..." readonly>
       <button class="add-btn" onclick="addToCart('עוגה', getCakeDetails())">הוסיפ|י לעגלה</button>
     </div>
 
     <div class="card">
-      <h3 contenteditable="true">עוגיות</h3>
-      <p contenteditable="true">עוגיות שוקולד צ'יפס, עוגיות חמאה ועוד</p>
+      <h3>עוגיות</h3>
+      <p>עוגיות שוקולד צ'יפס, עוגיות חמאה ועוד</p>
       <div style="margin-top:14px; text-align:right;">
         <p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;">בחרי סוג:</p>
         <label class="radio-label"><input type="checkbox" name="cookie" value="עוגיות שוקולד צ'יפס"> עוגיות שוקולד צ'יפס <span style="color:#c0763a; font-size:0.8rem;">(20 יח׳ — 35 ₪)</span></label>
@@ -186,9 +184,8 @@
     </div>
 
     <div class="card">
-      <img src="WhatsApp%20Image%202026-03-06%20at%2014.33.22%20(1).jpeg" alt="מאפים מגולגלים" style="width:100%; border-radius:12px; margin-bottom:12px; object-fit:cover; height:180px;">
-      <h3 contenteditable="true">מאפים מגולגלים</h3>
-      <p contenteditable="true">רולים טעימים, מגולגלים חמים ורכים</p>
+      <h3>מאפים מגולגלים</h3>
+      <p>רולים טעימים, מגולגלים חמים ורכים</p>
       <p class="card-price">20 יחידות — 35 ₪</p>
       <div style="margin-top:14px; text-align:right;">
         <p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;">בחרי סוג:</p>
@@ -201,8 +198,8 @@
     </div>
 
     <div class="card">
-      <h3 contenteditable="true">מיוחדים</h3>
-      <p contenteditable="true">בראוניז ועוד הפתעות מתוקות</p>
+      <h3>מיוחדים</h3>
+      <p>בראוניז ועוד הפתעות מתוקות</p>
       <div style="margin-top:14px; text-align:right;">
         <p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;">בחרי סוג:</p>
         <label class="radio-label"><input type="checkbox" name="special" value="בראוניז"> בראוניז <span style="color:#c0763a; font-size:0.8rem;">(20 יח׳ — 40 ₪)</span></label>
@@ -211,8 +208,8 @@
     </div>
 
     <div class="card">
-      <h3 contenteditable="true">מאפינס</h3>
-      <p contenteditable="true">מאפינס טריים ורכים בטעמים שונים</p>
+      <h3>מאפינס</h3>
+      <p>מאפינס טריים ורכים בטעמים שונים</p>
       <p class="card-price">10 יחידות — 50 ₪</p>
       <div style="margin-top:14px; text-align:right;">
         <p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;">בחרי סוג:</p>
@@ -226,13 +223,13 @@
   </div>
 
   <div style="max-width:900px; margin:40px auto 0; background:#fff; border-radius:16px; padding:30px; box-shadow:0 4px 16px rgba(0,0,0,0.07); text-align:center;">
-    <h3 style="color:#c0763a; font-size:1.3rem; margin-bottom:10px;" contenteditable="true">מארז מיוחד</h3>
-    <p style="color:#999; font-size:0.9rem; margin-bottom:20px;" contenteditable="true">בנו מארז משלכם עם כל מה שאתם אוהבים!</p>
+    <h3 style="color:#c0763a; font-size:1.3rem; margin-bottom:10px;">מארז מיוחד</h3>
+    <p style="color:#999; font-size:0.9rem; margin-bottom:20px;">בנו מארז משלכם עם כל מה שאתם אוהבים!</p>
     <div style="text-align:right;">
       <label class="field-label">מה תרצו במארז?</label>
-      <textarea id="packageContent" placeholder="לדוגמה: 5 עוגיות שוקולד, 3 מאפינס וניל, 2 בראוניז..."></textarea>
+      <textarea id="packageContent" placeholder="לדוגמה: 5 עוגיות שוקולד, 3 מאפינס וניל, 2 בראוניז..." readonly></textarea>
       <label class="field-label">פרטים נוספים / בקשות מיוחדות</label>
-      <textarea id="packageDetails" placeholder="לדוגמה: ללא אגוזים, עיטור מיוחד, למתנה..."></textarea>
+      <textarea id="packageDetails" placeholder="לדוגמה: ללא אגוזים, עיטור מיוחד, למתנה..." readonly></textarea>
     </div>
     <button class="add-btn" onclick="addToCart('מארז מיוחד', getPackageDetails())">הוסיפ|י לעגלה</button>
   </div>
@@ -240,20 +237,34 @@
 
 <section id="about">
   <div class="about-inner">
-    <h2 class="section-title" contenteditable="true">קצת עלי</h2>
+    <h2 class="section-title">קצת עלי</h2>
     <div class="divider"></div>
-    <p contenteditable="true">קוראים לי רונה ואני מחוברת למטבח מגיל 0.
+    <p>קוראים לי רונה ואני מחוברת למטבח מגיל 0.
 
 האהבה הכי גדולה שלי זה לאפות ולבשל. אני אוהבת לשמח את המשפחה שלי עם מאפים טעימים, טריים וחמים — ועכשיו אני רוצה לשמח גם אתכם! 💛</p>
   </div>
 </section>
 
 <footer>
-  <p contenteditable="true">עשוי באהבה על ידי <strong>מתוק ממני</strong> &copy; 2025</p>
+  <p>עשוי באהבה על ידי <strong>מתוק ממני</strong> &copy; 2025</p>
 </footer>
 
 <script>
   var cart = [];
+
+  // Block all typing in product-section text fields
+  document.addEventListener('keydown', function(e) {
+    var t = e.target;
+    if ((t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') && t.closest('#products')) {
+      e.preventDefault();
+    }
+  });
+  document.addEventListener('paste', function(e) {
+    if (e.target.closest && e.target.closest('#products')) e.preventDefault();
+  });
+  document.addEventListener('drop', function(e) {
+    if (e.target.closest && e.target.closest('#products')) e.preventDefault();
+  });
 
   function getSelected(name) {
     var els = document.querySelectorAll('input[name="' + name + '"]:checked');
