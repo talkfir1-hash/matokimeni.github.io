@@ -396,8 +396,9 @@
       if (item.price) totalSum += item.price; else hasCustom = true;
       msg += (i+1) + '. ' + item.type + ': ' + item.details + ' — ' + priceStr + '\n';
     });
-    msg += '\n💰 סה״כ לתשלום: ' + totalSum + ' ₪' + (hasCustom ? ' + מארז לפי תיאום' : '') + '\n';
-    msg += '⚠️ ההזמנה מחייבת תשלום מראש בביט';
+    msg += '\n💰 סה״כ לתשלום: ' + totalSum + ' ₪';
+    if (hasCustom) msg += ' + מארז לפי תיאום';
+    msg += '\n⚠️ ההזמנה מחייבת תשלום מראש בביט';
 
     var url = 'https://wa.me/972549915744?text=' + encodeURIComponent(msg);
     window.open(url, '_blank');
