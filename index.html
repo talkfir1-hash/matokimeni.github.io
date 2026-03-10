@@ -166,11 +166,11 @@
         <label class="radio-label"><input type="checkbox" name="cake" value="עוגת גבינה קרה"> עוגת גבינה קרה <span style="color:#c0763a; font-size:0.8rem;">50 ₪</span></label>
       </div>
       <label class="field-label" style="margin-top:10px;">לאיזה אירוע?</label>
-      <input type="text" id="cakeEvent" placeholder="לדוגמה: יום הולדת, חתונה..." readonly>
+      <input type="text" id="cakeEvent" placeholder="לדוגמה: יום הולדת, חתונה...">
       <label class="field-label">איזה עיצוב תרצו? <span style="color:#c0763a; font-size:0.8rem;">(+15 ₪)</span></label>
-      <textarea id="cakeDesign" placeholder="תארו את העיצוב..." style="height:60px; resize:vertical;" readonly></textarea>
+      <textarea id="cakeDesign" placeholder="תארו את העיצוב..." style="height:60px; resize:vertical;"></textarea>
       <label class="field-label">באיזה צבע תרצו את העיצוב שלכם? <span style="color:#999; font-weight:400;">(עוגת ביסקוויטים וגבינה ללא עיצוב)</span></label>
-      <input type="text" id="cakeColor" placeholder="לדוגמה: ורוד ולבן, כחול זהב..." readonly>
+      <input type="text" id="cakeColor" placeholder="לדוגמה: ורוד ולבן, כחול זהב...">
       <button class="add-btn" onclick="addToCart('עוגה', getCakeDetails())">הוסיפ|י לעגלה</button>
     </div>
 
@@ -179,9 +179,9 @@
       <p>עוגיות שוקולד צ'יפס, עוגיות חמאה ועוד</p>
       <div style="margin-top:14px; text-align:right;">
         <p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;">בחרי סוג:</p>
-        <label class="radio-label"><input type="checkbox" name="cookie" value="עוגיות שוקולד צ'יפס"> עוגיות שוקולד צ'יפס <span style="color:#c0763a; font-size:0.8rem;">(21 יח׳ — 42 ₪)</span></label>
+        <label class="radio-label"><input type="checkbox" name="cookie" value="עוגיות שוקולד צ'יפס"> עוגיות שוקולד צ'יפס <span style="color:#c0763a; font-size:0.8rem;">(20 יח׳ — 40 ₪)</span></label>
         <label class="radio-label"><input type="checkbox" name="cookie" value="עוגיות בראוניז"> עוגיות בראוניז <span style="color:#c0763a; font-size:0.8rem;">(15 יח׳ — 30 ₪)</span></label>
-        <label class="radio-label"><input type="checkbox" name="cookie" value="עוגיות חמאה"> עוגיות חמאה <span style="color:#c0763a; font-size:0.8rem;">(15 יח׳ — 25 ₪)</span></label>
+        <label class="radio-label"><input type="checkbox" name="cookie" value="עוגיות חמאה"> עוגיות חמאה <span style="color:#c0763a; font-size:0.8rem;">(15 יח׳ — 30 ₪)</span></label>
         <label class="radio-label"><input type="checkbox" name="cookie" value="עוגיות אמסטרדם"> עוגיות אמסטרדם <span style="color:#c0763a; font-size:0.8rem;">(22 יח׳ — 40 ₪)</span></label>
       </div>
       <button class="add-btn" onclick="addToCart('עוגיות', getSelected('cookie'))">הוסיפ|י לעגלה</button>
@@ -204,10 +204,11 @@
 
     <div class="card">
       <h3>מיוחדים</h3>
-      <p>בראוניז ועוד הפתעות מתוקות</p>
+      <p>בראוניז</p>
       <div style="margin-top:14px; text-align:right;">
         <p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;">בחרי סוג:</p>
         <label class="radio-label"><input type="checkbox" name="special" value="בראוניז"> בראוניז <span style="color:#c0763a; font-size:0.8rem;">(20 יח׳ — 40 ₪)</span></label>
+        <label class="radio-label"><input type="checkbox" name="special" value="עוגיות גרנולה"> עוגיות גרנולה <span style="color:#c0763a; font-size:0.8rem;">(20 יח׳ — 35 ₪)</span></label>
       </div>
       <button class="add-btn" onclick="addToCart('מיוחדים', getSelected('special'))">הוסיפ|י לעגלה</button>
     </div>
@@ -220,7 +221,7 @@
         <p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;">בחרי סוג:</p>
         <label class="radio-label"><input type="checkbox" name="muffin" value="מאפינס שוקולד"> מאפינס שוקולד</label>
         <label class="radio-label"><input type="checkbox" name="muffin" value="מאפינס בננה עם פצפוצי שוקולד"> מאפינס בננה עם פצפוצי שוקולד <span style="color:#c0763a; font-size:0.8rem;">(+10 ₪)</span></label>
-        <label class="radio-label"><input type="checkbox" name="muffin" value="מאפינס וניל"> מאפינס וניל</label>
+
       </div>
       <button class="add-btn" onclick="addToCart('מאפינס', getSelected('muffin'))">הוסיפ|י לעגלה</button>
     </div>
@@ -232,9 +233,9 @@
     <p style="color:#999; font-size:0.9rem; margin-bottom:20px;">בנו מארז משלכם עם כל מה שאתם אוהבים!</p>
     <div style="text-align:right;">
       <label class="field-label">מה תרצו במארז?</label>
-      <textarea id="packageContent" placeholder="לדוגמה: 5 עוגיות שוקולד, 3 מאפינס וניל, 2 בראוניז..." readonly></textarea>
+      <textarea id="packageContent" placeholder="לדוגמה: 5 עוגיות שוקולד, 3 מאפינס וניל, 2 בראוניז..."></textarea>
       <label class="field-label">פרטים נוספים / בקשות מיוחדות</label>
-      <textarea id="packageDetails" placeholder="לדוגמה: ללא אגוזים, עיטור מיוחד, למתנה..." readonly></textarea>
+      <textarea id="packageDetails" placeholder="לדוגמה: ללא אגוזים, עיטור מיוחד, למתנה..."></textarea>
     </div>
     <button class="add-btn" onclick="addToCart('מארז מיוחד', getPackageDetails())">הוסיפ|י לעגלה</button>
   </div>
@@ -257,18 +258,18 @@
 <script>
   var cart = [];
 
-  // Block all typing in product-section text fields
+  // Block typing only in fields that are readonly
   document.addEventListener('keydown', function(e) {
     var t = e.target;
-    if ((t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') && t.closest('#products')) {
+    if ((t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') && t.readOnly) {
       e.preventDefault();
     }
   });
   document.addEventListener('paste', function(e) {
-    if (e.target.closest && e.target.closest('#products')) e.preventDefault();
+    if (e.target.readOnly) e.preventDefault();
   });
   document.addEventListener('drop', function(e) {
-    if (e.target.closest && e.target.closest('#products')) e.preventDefault();
+    if (e.target.readOnly) e.preventDefault();
   });
 
   function getSelected(name) {
@@ -296,9 +297,9 @@
   var prices = {
     'עוגת שוקולד': 30, 'עוגת לימון': 30, 'עוגת בננה': 30, 'עוגת תפוזים': 30,
     'עוגת ביסקוויטים': 45, 'עוגת גבינה קרה': 50,
-    "עוגיות שוקולד צ'יפס": 42, 'עוגיות בראוניז': 30, 'עוגיות חמאה': 25, 'עוגיות אמסטרדם': 40,
-    'בראוניז': 40,
-    'מאפינס שוקולד': 40, 'מאפינס וניל': 40, 'מאפינס בננה עם פצפוצי שוקולד': 50,
+    "עוגיות שוקולד צ'יפס": 40, 'עוגיות בראוניז': 30, 'עוגיות חמאה': 30, 'עוגיות אמסטרדם': 40,
+    'בראוניז': 40, 'עוגיות גרנולה': 35,
+    'מאפינס שוקולד': 40, 'מאפינס בננה עם פצפוצי שוקולד': 50,
     'שוקולד בבצק וממרח שוקולד בפנים': 38, 'וניל בבצק וממרח שוקולד בפנים': 35,
     'וניל בבצק וממרח לוטוס בפנים': 40, 'שוקולד בבצק וממרח לוטוס בפנים': 41
   };
