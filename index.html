@@ -40,7 +40,6 @@
   .add-btn { background: #fff8f0; color: #c0763a; border: 2px solid #e8a96a; border-radius: 30px; padding: 10px 20px; font-size: 0.9rem; cursor: pointer; transition: all .2s; font-family: inherit; margin-top: 16px; }
   .add-btn:hover { background: #c0763a; color: #fff; border-color: #c0763a; }
 
-  /* readonly style */
   input[type="text"][readonly], input[type="tel"][readonly], input[type="datetime-local"][readonly], textarea[readonly] {
     background: #f5f0eb; color: #aaa; cursor: not-allowed; border-color: #e8d5c0;
   }
@@ -212,19 +211,6 @@
       <button class="add-btn" onclick="addToCart('מיוחדים', getSelected('special'))">הוסיפ|י לעגלה</button>
     </div>
 
-    <div class="card">
-      <h3>מאפינס</h3>
-      <p>מאפינס טריים ורכים בטעמים שונים</p>
-      <p class="card-price">10 יחידות — 40 ₪</p>
-      <div style="margin-top:14px; text-align:right;">
-        <p style="font-size:0.85rem; font-weight:600; color:#c0763a; margin-bottom:8px;">בחרי סוג:</p>
-        <label class="radio-label"><input type="checkbox" name="muffin" value="מאפינס שוקולד"> מאפינס שוקולד</label>
-        <label class="radio-label"><input type="checkbox" name="muffin" value="מאפינס בננה עם פצפוצי שוקולד"> מאפינס בננה עם פצפוצי שוקולד <span style="color:#c0763a; font-size:0.8rem;">(+10 ₪)</span></label>
-
-      </div>
-      <button class="add-btn" onclick="addToCart('מאפינס', getSelected('muffin'))">הוסיפ|י לעגלה</button>
-    </div>
-
   </div>
 
   <div style="max-width:900px; margin:40px auto 0; background:#fff; border-radius:16px; padding:30px; box-shadow:0 4px 16px rgba(0,0,0,0.07); text-align:center;">
@@ -232,7 +218,7 @@
     <p style="color:#999; font-size:0.9rem; margin-bottom:20px;">בנו מארז משלכם עם כל הדברים שהכי אהבתם!</p>
     <div style="text-align:right;">
       <label class="field-label">מה תרצו במארז?</label>
-      <textarea id="packageContent" placeholder="לדוגמה: 5 עוגיות שוקולד, 3 מאפינס וניל, 2 בראוניז..."></textarea>
+      <textarea id="packageContent" placeholder="לדוגמה: 5 עוגיות שוקולד, 3 בראוניז..."></textarea>
       <label class="field-label">פרטים נוספים / בקשות מיוחדות</label>
       <textarea id="packageDetails" placeholder="לדוגמה: ללא אגוזים, עיטור מיוחד, למתנה..."></textarea>
     </div>
@@ -257,12 +243,29 @@
 <script>
   var cart = [];
 
-  // Block typing only in fields that are readonly
+  var prices = {
+    'עוגת שוקולד': 30, 'עוגת לימון': 30, 'עוגת בננה': 30, 'עוגת תפוזים': 30,
+    'עוגת ביסקוויטים': 45, 'עוגת גבינה קרה': 50,
+    "עוגיות שוקולד צ'יפס": 40, 'עוגיות בראוניז': 30, 'עוגיות חמאה': 30, 'עוגיות אמסטרדם': 40,
+    'בראוניז': 40, 'עוגיות גרנולה': 35,
+    'שוקולד בבצק וממרח שוקולד בפנים': 38, 'וניל בבצק וממרח שוקולד בפנים': 35,
+    'וניל בבצק וממרח לוטוס בפנים': 40, 'שוקולד בבצק וממרח לוטוס בפנים': 41
+  };
+
+  function calcPrice(type, details) {
+    if (type === 'מארז מיוחד') return null;
+    var total = 0;
+    var items = details.split('|')[0].split(',').map(function(s){ return s.trim(); });
+    items.forEach(function(item) {
+      if (prices[item]) total += prices[item];
+    });
+    if (type === 'עוגה' && details.indexOf('עיצוב:') !== -1) total += 15;
+    return total;
+  }
+
   document.addEventListener('keydown', function(e) {
     var t = e.target;
-    if ((t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') && t.readOnly) {
-      e.preventDefault();
-    }
+    if ((t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') && t.readOnly) e.preventDefault();
   });
   document.addEventListener('paste', function(e) {
     if (e.target.readOnly) e.preventDefault();
@@ -293,28 +296,6 @@
     return content + (details ? ' | ' + details : '');
   }
 
-  var prices = {
-    'עוגת שוקולד': 30, 'עוגת לימון': 30, 'עוגת בננה': 30, 'עוגת תפוזים': 30,
-    'עוגת ביסקוויטים': 45, 'עוגת גבינה קרה': 50,
-    "עוגיות שוקולד צ'יפס": 40, 'עוגיות בראוניז': 30, 'עוגיות חמאה': 30, 'עוגיות אמסטרדם': 40,
-    'בראוניז': 40, 'עוגיות גרנולה': 35,
-    'מאפינס שוקולד': 40, 'מאפינס בננה עם פצפוצי שוקולד': 50,
-    'שוקולד בבצק וממרח שוקולד בפנים': 38, 'וניל בבצק וממרח שוקולד בפנים': 35,
-    'וניל בבצק וממרח לוטוס בפנים': 40, 'שוקולד בבצק וממרח לוטוס בפנים': 41
-  };
-
-  function calcPrice(type, details) {
-    if (type === 'מארז מיוחד') return null;
-    var total = 0;
-    var items = details.split('|')[0].split(',').map(function(s){ return s.trim(); });
-    items.forEach(function(item) {
-      if (prices[item]) total += prices[item];
-    });
-    // עיצוב עוגה
-    if (type === 'עוגה' && details.indexOf('עיצוב:') !== -1) total += 15;
-    return total;
-  }
-
   function addToCart(type, details) {
     if (!details) { alert('אנא בחרי סוג לפני הוספה לעגלה'); return; }
     var price = calcPrice(type, details);
@@ -340,8 +321,7 @@
       if (item.price) totalSum += item.price; else hasCustom = true;
       return '<div class="cart-item"><div class="cart-item-name"><strong>' + item.type + '</strong><br><span style="font-size:0.8rem;color:#999;">' + item.details + '</span><br><span style="font-size:0.85rem;color:#c0763a;font-weight:700;">' + priceStr + '</span></div><button class="cart-item-remove" onclick="removeFromCart(' + i + ')">✕</button></div>';
     }).join('');
-    var totalLine = '<div style="margin-top:14px;padding-top:14px;border-top:2px solid #f0e6d3;font-weight:700;color:#c0763a;font-size:1rem;">סה״כ: ' + totalSum + ' ₪' + (hasCustom ? ' + מארז לפי תיאום' : '') + '</div>';
-    el.innerHTML += totalLine;
+    el.innerHTML += '<div style="margin-top:14px;padding-top:14px;border-top:2px solid #f0e6d3;font-weight:700;color:#c0763a;font-size:1rem;">סה״כ: ' + totalSum + ' ₪' + (hasCustom ? ' + מארז לפי תיאום' : '') + '</div>';
   }
 
   function removeFromCart(i) {
@@ -378,7 +358,6 @@
     var phone = document.getElementById('detailsPhone').value;
     var delivery = document.querySelector('input[name="delivery"]:checked');
     var address = document.getElementById('detailsAddress').value;
-    var date = document.getElementById('detailsDate').value;
     var allergies = document.getElementById('detailsAllergies').value;
     var notes = document.getElementById('detailsNotes').value;
 
@@ -390,9 +369,8 @@
     msg += 'שם: ' + name + '\n';
     msg += 'טלפון: ' + phone + '\n';
     msg += 'אופן קבלה: ' + delivery.value + (address ? ' — ' + address : '') + '\n';
-    if (date) msg += 'מועד רצוי: ' + new Date(date).toLocaleString('he-IL') + '\n';
     if (allergies) msg += 'אלרגנים: ' + allergies + '\n';
-    if (notes) msg += 'הערות: ' + notes + '\n';
+    if (notes) msg += 'בקשות מיוחדות: ' + notes + '\n';
     msg += '\nפרטי הזמנה:\n';
     var totalSum = 0;
     var hasCustom = false;
